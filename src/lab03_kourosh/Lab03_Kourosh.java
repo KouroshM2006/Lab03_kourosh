@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -45,6 +46,7 @@ public class Lab03_Kourosh extends Application {
         
         //Buttons
         Button registerBttn = new Button("Register");
+        registerBttn.setDisable(true);
         Button clearBttn = new Button("Clear");
          
         //setting nodes into Grid Pane
@@ -63,6 +65,20 @@ public class Lab03_Kourosh extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
+        
+        //Text Field Array
+        TextField[] textFields = {firstNameField, lastNameField, emailField, passwordField};
+        for (TextField field : textFields) {
+            field.setOnKeyPressed(e -> {
+                for (TextField textField : textFields) {
+                    if (textField.getText().isEmpty()) {
+                        registerBttn.setDisable(true);
+                    } else {
+                        registerBttn.setDisable(false);
+                    }
+                }
+            });
+        }
         
         root.setCenter(grid);
         
