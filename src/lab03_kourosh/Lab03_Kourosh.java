@@ -5,6 +5,7 @@
 package lab03_kourosh;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -25,12 +26,16 @@ public class Lab03_Kourosh extends Application {
 
     @Override
     public void start(Stage stage){
+        //grid pane and border pane
+        GridPane grid = new GridPane();
+        BorderPane root = new BorderPane();
+        
         //labels and TextFields
         Label firstNameLabel = new Label("First Name:");
         TextField firstNameField = new TextField();
         
-        Label LastNameLabel = new Label("Last Name:");
-        TextField LastNameField = new TextField();
+        Label lastNameLabel = new Label("Last Name:");
+        TextField lastNameField = new TextField();
         
         Label emailLabel = new Label("Email:");
         TextField emailField = new TextField();
@@ -42,11 +47,26 @@ public class Lab03_Kourosh extends Application {
         Button registerBttn = new Button("Register");
         Button clearBttn = new Button("Clear");
          
-        GridPane grid = new GridPane();
-        BorderPane root = new BorderPane();
+        //setting nodes into Grid Pane
+        grid.add(firstNameLabel, 0, 0);
+        grid.add(firstNameField, 1, 0);
+        grid.add(lastNameLabel, 0, 1);
+        grid.add(lastNameField, 1, 1);
+        grid.add(emailLabel, 0, 2);
+        grid.add(emailField, 1, 2);
+        grid.add(passwordLabel, 0, 3);
+        grid.add(passwordField, 1, 3);
+        grid.add(registerBttn, 0, 4);
+        grid.add(clearBttn, 1, 4);
+        
+        //setting grid seettings
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        
         root.setCenter(grid);
         
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
