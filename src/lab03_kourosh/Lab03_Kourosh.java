@@ -27,6 +27,37 @@ public class Lab03_Kourosh extends Application {
         launch(args);
     }
     
+    /**
+     * method to validate the email
+     * @param email
+     * @return true or false according to the validity of the email
+     */
+    private boolean checkEmail(String email) {
+        int index = email.indexOf('@');
+        if (!(index > 0)) return false;
+        
+        if (email.indexOf('.', index + 2) != -1) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * method to validate the password
+     * @param password
+     * @return true or false according to the validity of the password
+     */
+    private boolean checkPassword(String password) {
+        boolean digit = false,  letter = false;
+        
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) digit = true;
+            else if (Character.isLetter(c)) letter = true;
+        }
+        
+        return digit && letter;
+    }
     
     @Override
     public void start(Stage stage){
@@ -91,8 +122,13 @@ public class Lab03_Kourosh extends Application {
         //clear button event
         clearBttn.setOnAction(e ->{
             for (TextField field : textFields) {
-                field.clear();
-            }
+                field.clear();   
+            }message.setText("");
+        });
+        
+        //Register button event
+        registerBttn.setOnAction(e ->{     
+            message.setText(checkEmail(emailField.getText()) && checkPassword(passwordField.getText()) ? "Welcome" : "Error");
         });
         
         
