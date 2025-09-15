@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.input.KeyEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -24,7 +26,8 @@ public class Lab03_Kourosh extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+    
+    
     @Override
     public void start(Stage stage){
         //grid pane and border pane
@@ -44,6 +47,8 @@ public class Lab03_Kourosh extends Application {
         Label passwordLabel = new Label("Password:");
         PasswordField passwordField = new PasswordField();
         
+        Label message = new Label();
+        
         //Buttons
         Button registerBttn = new Button("Register");
         registerBttn.setDisable(true);
@@ -60,6 +65,7 @@ public class Lab03_Kourosh extends Application {
         grid.add(passwordField, 1, 3);
         grid.add(registerBttn, 0, 4);
         grid.add(clearBttn, 1, 4);
+        grid.add(message, 0,5);
         
         //setting grid seettings
         grid.setHgap(10);
@@ -68,6 +74,8 @@ public class Lab03_Kourosh extends Application {
         
         //Text Field Array
         TextField[] textFields = {firstNameField, lastNameField, emailField, passwordField};
+        
+        //button disabled when all text fields are not filled
         for (TextField field : textFields) {
             field.setOnKeyPressed(e -> {
                 for (TextField textField : textFields) {
@@ -79,6 +87,14 @@ public class Lab03_Kourosh extends Application {
                 }
             });
         }
+        
+        //clear button event
+        clearBttn.setOnAction(e ->{
+            for (TextField field : textFields) {
+                field.clear();
+            }
+        });
+        
         
         root.setCenter(grid);
         
